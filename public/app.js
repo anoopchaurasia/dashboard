@@ -1,9 +1,10 @@
 function showdata(data){
+    data = JSON.parse(JSON.stringify(data).replace(/\\r/gim, "").replace(/\\n/gim, "\n"))
     let table = `<table class="table">`
     for(let k in data) {
         table += `<tr><td>${k}</td><td>
             <pre>
-                ${JSON.stringify(data[k], null, 2).replace(/\\r/gim, "").replace(/\\n/gim, "\n")}
+                ${JSON.stringify(data[k], null, 2)}
             </pre>
         </td></tr>`
     }
