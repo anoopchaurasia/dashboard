@@ -3,7 +3,7 @@ function showdata(data){
     for(let k in data) {
         table += `<tr><td>${k}</td><td>
             <pre>
-                ${JSON.stringify(data[k], null, 2)}
+                ${JSON.stringify(data[k], null, 2).replace(/\\r/gim, "").replace(/\\n/gim, "\n")}
             </pre>
         </td></tr>`
     }
