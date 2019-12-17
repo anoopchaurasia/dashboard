@@ -1,4 +1,5 @@
 function template1(data){
+    if(data.server_name===data.command_name) return ""
     return `<div style="float:left; margin: 10px" class="template1">
         <table>
             <tr><th>Server Name</th><td>${data.server_name}</td> </tr>
