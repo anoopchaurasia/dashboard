@@ -14,7 +14,7 @@ function getTime(date){
     date = new Date(date);
     let diff = Date.now() - date.getTime();
     let mili = parseInt(diff%1000);
-    diff = diff%1000;
+    diff = diff/1000;
     let seconds = parseInt(diff%60);
     diff = diff/60;
     let minute = parseInt(diff%60);
