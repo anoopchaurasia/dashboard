@@ -8,7 +8,7 @@ function showdata(data){
         return 0
     });
     keys.forEach(x=>{
-        table += template1(x);
+        table += template1(data[x]);
     })
     table += "</div>"
     document.getElementById("container").innerHTML = table;
