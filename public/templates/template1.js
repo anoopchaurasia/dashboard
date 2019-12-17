@@ -19,7 +19,7 @@ function dataFormatter(data) {
 }
 
 function redisMemory(data) {
-
+    return data.split("\n").filter(x=>x.match(/human/)).join("<br>")
 }
 
 function getTime(date){
