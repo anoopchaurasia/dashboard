@@ -1,7 +1,6 @@
 function showdata(data){
     data = JSON.parse(JSON.stringify(data).replace(/\\r/gim, "").replace(/\\n/gim, "\\n"))
     let table = `<div class="table">`
-    table += "<div id='refresh_counter></div>"
     for(let k in data) {
         table += template1(data[k]);
     }
