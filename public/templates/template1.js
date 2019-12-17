@@ -5,14 +5,26 @@ function template1(data){
             <tr><th>Command</th><td>${data.command_name}</td> </tr>
             <tr><th>Received At</th><td>${getTime(data.received_at)}</td></tr>
         </table>
-       
+        ${dataFormatter(data)}
     </div>`
+}
+
+function dataFormatter(data) {
+    switch(date.formatter) {
+        case 'redis_memory':
+            return redisMemory(data.data);
+        default:
+            return data.data;
+    }
+}
+
+function redisMemory(data) {
+    
 }
 
 function getTime(date){
     date = new Date(date);
     let diff = Date.now() - date.getTime();
-    let mili = parseInt(diff%1000);
     diff = diff/1000;
     let seconds = parseInt(diff%60);
     diff = diff/60;
