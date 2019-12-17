@@ -19,7 +19,7 @@ function getTime(date){
     diff = diff/60;
     let minute = parseInt(diff%60);
     diff = diff/60;
-    let hours = diff%24||"00";
+    let hours = parseInt(diff%24)||"00";
     return two(hours) +":"+two(minute)+":"+two(seconds);
 }
 
