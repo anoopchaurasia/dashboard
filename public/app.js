@@ -3,8 +3,8 @@ function showdata(data){
     let table = `<div class="table">`
     let keys = Object.keys(data);
     keys.sort((a,b)=>{
-        if(a>b) return -1;
-        if(a<b) return 1;
+        if(a<b) return -1;
+        if(a>b) return 1;
         return 0
     });
     let current_key = [data[keys[0]]].server_name;
