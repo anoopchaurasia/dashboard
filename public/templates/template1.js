@@ -13,7 +13,7 @@ function template1(data){
 
 function getTime(date){
     date = new Date(date);
-    let diff = Date.now() - date.now();
+    let diff = Date.now() - date.getTime();
     let mili = diff%1000;
     diff = diff%1000;
     let seconds = diff%60;
