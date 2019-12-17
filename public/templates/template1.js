@@ -10,7 +10,7 @@ function template1(data){
 }
 
 function dataFormatter(data) {
-    switch(date.formatter) {
+    switch(data.formatter) {
         case 'redis_memory':
             return redisMemory(data.data);
         default:
@@ -19,7 +19,7 @@ function dataFormatter(data) {
 }
 
 function redisMemory(data) {
-    
+
 }
 
 function getTime(date){
