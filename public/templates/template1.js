@@ -13,14 +13,14 @@ function template1(data){
 function getTime(date){
     date = new Date(date);
     let diff = Date.now() - date.getTime();
-    let mili = diff%1000;
+    let mili = parseInt(diff%1000);
     diff = diff%1000;
-    let seconds = diff%60;
+    let seconds = parseInt(diff%60);
     diff = diff/60;
-    let minute = diff%60;
+    let minute = parseInt(diff%60);
     diff = diff/60;
     let hours = diff%24||"00";
-    return hours +":"+minute+":"+seconds;
+    return two(hours) +":"+two(minute)+":"+two(seconds);
 }
 
 function two(str){
