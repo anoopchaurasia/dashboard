@@ -14,7 +14,7 @@ function dataFormatter(data) {
         case 'redis_memory':
             return redisMemory(data.data);
         default:
-            if(data.data.match(/# Memory/gim)) return redisMemory(data.data);
+            if(typeof data.data ==='string' && data.data.match(/# Memory/gim)) return redisMemory(data.data);
             return data.data;
     }
 }
