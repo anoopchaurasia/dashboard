@@ -17,6 +17,9 @@ function dataFormatter(data) {
         case 'item_length':{
             return "List Count: "+ data.data;
         }
+        case 'table':{
+            return "<pre> "+ data.data +"</pre>";
+        }
         default:
             if(typeof data.data ==='string' && data.data.match(/# Memory/gim)) return redisMemory(data.data);
             return data.data;
