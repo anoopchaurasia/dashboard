@@ -16,9 +16,13 @@ function getTime(date){
     let mili = diff%1000;
     diff = diff%1000;
     let seconds = diff%60;
-    diff = diff%60;
+    diff = diff/60;
     let minute = diff%60;
-    diff = diff%60;
+    diff = diff/60;
     let hours = diff%24||"00";
     return hours +":"+minute+":"+seconds;
+}
+
+function two(str){
+    return ("000"+str).slice(-2);
 }
