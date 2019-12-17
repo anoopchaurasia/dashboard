@@ -7,7 +7,13 @@ function showdata(data){
         if(a<b) return 1;
         return 0
     });
+    let current_key = [data[keys[0]]].server_name;
     keys.forEach(x=>{
+        let d = data[x];
+        if(d.server_name!==current_key) {
+            table +="<hr style='width:100%'/>"
+        }
+        current_key= d.server_name;
         table += template1(data[x]);
     })
     table += "</div>"
