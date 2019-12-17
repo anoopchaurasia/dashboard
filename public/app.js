@@ -7,4 +7,7 @@ function showdata(data){
     table += "</div>"
     document.getElementById("container").innerHTML = table;
 }
+setInterval(x=>{
+    fetch("/data").then(x=>x.json()).then(showdata);    
+}, 1*60*1000)
 fetch("/data").then(x=>x.json()).then(showdata);
