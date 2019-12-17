@@ -4,9 +4,8 @@ function template1(data){
             <tr><th>Server Name</th><td>${data.server_name}</td> </tr>
             <tr><th>Command</th><td>${data.command_name}</td> </tr>
             <tr><th>Received At</th><td>${getTime(data.received_at)}</td></tr>
-            </tr>
         </table>
-        ${JSON.stringify(data)}
+       
     </div>`
 }
 
