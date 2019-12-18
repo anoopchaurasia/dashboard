@@ -7,18 +7,31 @@ function showdata(data){
         if(a>b) return 1;
         return 0
     });
-    let current_key = [data[keys[0]]].server_name;
+    let current_key = "";
     keys.forEach(x=>{
         let d = data[x];
         if(d.server_name!==current_key) {
             table +="<hr style='width:100%'/>"
         }
         current_key= d.server_name;
-        table += template1(data[x]);
+        table += template1(data[x], x)
     })
     table += "</div>"
     document.getElementById("container").innerHTML = table;
 }
+
+function deleteData(id) {
+    return fetch("/delete_data?key="+id, {
+        method:"delete",
+    }).then(x=> x.json()).then(showdata)
+}
+
+document.getElementById("container").onclick = function(y)  {
+    if(y.target.className=="delete") {
+        deleteData(y.target.id)
+    }
+}
+
 
 setInterval(x=>{
     document.getElementById("refresh_counter").innerHTML = "refreshed "+ ((Date.now()-refreshed_at)/1000) +"s ago";

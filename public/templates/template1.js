@@ -1,6 +1,7 @@
-function template1(data){
+function template1(data, key1){
     if(data.server_name===data.command_name) return ""
     return `<div style="float:left; margin: 10px" class="template1">
+    <div id="${key1}" class="delete">X</div>
         <table>
             <tr><th>Server Name</th><td>${data.server_name}</td> </tr>
             <tr><th>Command</th><td>${data.command_name}</td> </tr>
