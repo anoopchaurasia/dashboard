@@ -20,10 +20,25 @@ function dataFormatter(data) {
         case 'table':{
             return "<pre> "+ data.data +"</pre>";
         }
+        case 'ec2metadata':{
+            return ec2metadata(data.data)
+        }
         default:
             if(typeof data.data ==='string' && data.data.match(/# Memory/gim)) return redisMemory(data.data);
             return data.data;
     }
+}
+
+let list = [
+    "instance-type",
+    "public-ipv4",
+    "security-groups",
+    "ami-id", 
+    "instance-id",
+]
+
+function ec2metadata(data) {
+    return "<table>"+ data.map(x=>x.split(":")).filter(x=> list.includes(x[0].trim())).map(x=> `<tr><th>${x.join("</th><td>")}</td></tr>`).join("") + "</table>"
 }
 
 function redisMemory(data) {
