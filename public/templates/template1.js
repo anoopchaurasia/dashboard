@@ -17,6 +17,7 @@ function dataFormatter(data) {
         case 'item_length':{
             return "List Count: "+ data.data;
         }
+        case 'pm2_log':
         case 'table':{
             return "<pre> "+ data.data +"</pre>";
         }
