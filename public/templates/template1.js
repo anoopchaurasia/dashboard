@@ -1,11 +1,12 @@
 function template1(data, key1){
     if(data.server_name===data.command_name) return ""
-    return `<div style="float:left; margin: 10px" class="template1">
+    let time = getTime(data.received_at);
+    return `<div style="float:left; margin: 10px; border-color: ${time>"00:04:00"?'red':'#dfe341'};" class="template1">
     <div id="${key1}" class="delete">X</div>
         <table>
             <tr><th>Server Name</th><td>${data.server_name}</td> </tr>
             <tr><th>Command</th><td>${data.command_name}</td> </tr>
-            <tr><th>Received At</th><td>${getTime(data.received_at)}</td></tr>
+            <tr><th>Received At</th><td>${time}</td></tr>
         </table>
         ${dataFormatter(data)}
     </div>`
