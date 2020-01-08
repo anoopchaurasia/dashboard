@@ -1,4 +1,5 @@
 let https = require('https');
+console.log(process.env.PAGER_INCIDENT_KEY, process.env.PAGER_SERVICE_KEY)
 function sendAnalytics(params) {
   let key = params.name.split("_").join(" ");
   console.error("sending data to pager", key, params.body);

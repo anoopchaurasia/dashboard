@@ -1,5 +1,5 @@
-let stored_data = require("./src/udp").stored_data;
 require("dotenv").config()
+let stored_data = require("./src/udp").stored_data;
 const express = require("express");
 const app = express();
 
