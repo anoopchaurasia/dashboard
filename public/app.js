@@ -26,12 +26,20 @@ function deleteData(id) {
     }).then(x=> x.json()).then(showdata)
 }
 
+function deleteAll() {
+    return fetch("/clean_all?key="+id, {
+        method:"delete",
+    }).then(x=> x.json()).then(showdata)
+}
+
 document.getElementById("container").onclick = function(y)  {
     if(y.target.className=="delete") {
         deleteData(y.target.id)
     }
 }
 
+
+document.getElementById("delete_all").onclick = deleteAll;
 
 setInterval(x=>{
     document.getElementById("refresh_counter").innerHTML = "refreshed "+ ((Date.now()-refreshed_at)/1000) +"s ago";

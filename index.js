@@ -21,5 +21,12 @@ app.delete('/delete_data', function(req, res){
     res.json(stored_data);
 })
 
+app.delete('/clean_all', function(req, res){
+  for(let i in stored_data) {
+    delete stored_data[i];
+  }
+  res.json(stored_data);
+})
+
 app.use(express.static('public'));
 app.listen("8080", "localhost");
