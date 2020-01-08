@@ -33,7 +33,7 @@ function sendAnalytics(params) {
       "Content-Type": "application/json",
       "Accept": "application/vnd.pagerduty+json;version=2",
       "From": "anoop@vumonic.com",
-      "Authorization": "Token token=yGjbQzEKso3bXj6xpAyX"
+      "Authorization": `Token token=${process.env.PAGER_API_KEY}`
     }
   }
     
