@@ -27,7 +27,7 @@ function deleteData(id) {
 }
 
 function deleteAll() {
-    return fetch("/clean_all?key="+id, {
+    return fetch("/clean_all", {
         method:"delete",
     }).then(x=> x.json()).then(showdata)
 }
