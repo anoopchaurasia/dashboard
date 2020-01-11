@@ -21,41 +21,6 @@ var myMetric = new cloudwatchMetrics.Metric('RedisCount', 'Count', [], {sendCall
 function sendToPager(msg){
   if(msg.formatter === "item_length") {
     myMetric.put(msg.data*1, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
-    switch(msg.command_name) {
-      case "db_user_actions": {
-        msg.data > 100 && pager.send({name: msg.command_name, body: " exceeds more than 100"});
-        break;
-      }
-      case "email_update_for_user":{
-        msg.data > 2000 && pager.send({name: msg.command_name, body: " exceeds more than 2000"});
-        break;
-      }
-
-      case "imap_user_actions": { 
-        msg.data > 500 && pager.send({name: msg.command_name, body: " exceeds more than 500"});
-        break;
-      }
-
-      case "process_user_login": {
-        msg.data > 10 && pager.send({name: msg.command_name, body: " exceeds more than 10"});
-        break;
-      }
-
-      case "qc_scan_user_boxes": {
-        msg.data > 10 && pager.send({name: msg.command_name, body: " exceeds more than 10"});
-        break;
-      }
-
-      case "raw_email_data": {
-        msg.data > 1000 && pager.send({name: msg.command_name, body: " exceeds more than 1000"});
-        break;
-      }
-
-      case "new_data_avail": {
-        msg.data > 1000 && pager.send({name: msg.command_name, body: " exceeds more than 1000"});
-        break;
-      }
-    }
   }
 }
 
