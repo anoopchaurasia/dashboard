@@ -16,7 +16,7 @@ server.on('message', (msg, rinfo) => {
 
 var cloudwatchMetrics = require('cloudwatch-metrics');
 cloudwatchMetrics.initialize({region:"eu-central-1"})
-var myMetric = new cloudwatchMetrics.Metric('namespace', 'Count', [], {sendCallback: (err)=> console.error(err)});
+var myMetric = new cloudwatchMetrics.Metric('RedisCount', 'Count', [], {sendCallback: (err)=> console.error(err)});
 
 function sendToPager(msg){
   if(msg.formatter === "item_length") {
