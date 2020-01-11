@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "dotenv": "*"
+    "cloudwatch-metrics": "^1.2.0",
+    "dotenv": "*",
+    "express": "^4.17.1"
   }
 }

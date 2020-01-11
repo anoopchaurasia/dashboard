@@ -14,9 +14,13 @@ server.on('message', (msg, rinfo) => {
   console.log(`from ${rinfo.address}:${rinfo.port}`);
 });
 
+var cloudwatchMetrics = require('cloudwatch-metrics');
+cloudwatchMetrics.initialize({region:"eu-central-1"})
+var myMetric = new cloudwatchMetrics.Metric('namespace', 'Count', [], {sendCallback: (err)=> console.error(err)});
 
 function sendToPager(msg){
   if(msg.formatter === "item_length") {
+    myMetric.put(msg.data*1, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
     switch(msg.command_name) {
       case "db_user_actions": {
         msg.data > 100 && pager.send({name: msg.command_name, body: " exceeds more than 100"});
