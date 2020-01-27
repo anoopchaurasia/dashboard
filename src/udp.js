@@ -1,6 +1,5 @@
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
-const pager = require("./send_to_pagerduty");
 server.on('error', (err) => {
   console.log(`server error:\n${err.stack}`);
   server.close();
@@ -8,19 +7,29 @@ server.on('error', (err) => {
 
 server.on('message', (msg, rinfo) => {
   msg = JSON.parse(msg);
-  sendToPager(msg);
-  msg.received_at = new Date();
-  key_values[msg.server_name+"->"+msg.command_name] = msg;
-  console.log(`from ${rinfo.address}:${rinfo.port}`);
+  if(msg.type=="multi") {
+    msg.data.forEach(handleMessage, rinfo);
+  } else {
+    handleMessage(msg, rinfo);
+  }
 });
+
+function handleMessage(msg, rinfo) {
+  sendToPager(msg);
+  msg.server_name = msg.server_name||rinfo.address;
+  msg.command_name = msg.command_name||msg.type;
+  msg.received_at = new Date();
+  key_values[(msg.server_name)+"->"+(msg.command_name)] = msg;
+  console.log(`from ${rinfo.address}:${rinfo.port}`);
+}
 
 var cloudwatchMetrics = require('cloudwatch-metrics');
 cloudwatchMetrics.initialize({region:"eu-central-1"})
 var myMetric = new cloudwatchMetrics.Metric('RedisCount', 'Count', [], {sendCallback: (err)=> console.error(err)});
 
 function sendToPager(msg){
-  if(msg.formatter === "item_length") {
-    myMetric.put(msg.data*1, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
+  if(msg.formatter === "item_length"||msg.formatter==="count") {
+    myMetric.put(msg.data*1||msg.Value, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
   }
 }
 
