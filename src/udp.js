@@ -34,8 +34,7 @@ cloudwatchMetrics.initialize({region:"eu-central-1"})
 var myMetric = new cloudwatchMetrics.Metric('RedisCount', 'Count', [], {
   sendCallback: (err)=> err && console.error(err),
   sendInterval: 30*1000,
-  summaryInterval: 60*1000,
-  maxCapacity: 40
+  summaryInterval: 60*1000
 
 });
 
