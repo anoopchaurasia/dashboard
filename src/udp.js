@@ -29,7 +29,7 @@ var myMetric = new cloudwatchMetrics.Metric('RedisCount', 'Count', [], {sendCall
 
 function sendToPager(msg){
   if(msg.formatter === "item_length"||msg.formatter==="count") {
-    myMetric.put(msg.data*1||msg.Value, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
+    myMetric.put(msg.data*1||msg.value*1, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
   }
 }
 
