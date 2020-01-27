@@ -8,8 +8,13 @@ server.on('error', (err) => {
 server.on('message', (msg, rinfo) => {
   msg = JSON.parse(msg);
   if(msg.type=="multi") {
-    console.log(msg)
-    msg.data.forEach(x=> handleMessage(x, rinfo));
+
+    msg.data.filter(x=> x.formatter !=="count").forEach(x=> handleMessage(x, rinfo));
+    let counter =  msg.data.filter(x=> x.formatter==="count");
+    if(counter.length===0) return;
+    counter[0].value = counter.map(x=>x.value).reduce((a,b)=> a+b, 0);
+    handleMessage(counter[0], rinfo)
+
   } else {
     handleMessage(msg, rinfo);
   }
