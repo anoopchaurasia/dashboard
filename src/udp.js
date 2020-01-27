@@ -8,7 +8,8 @@ server.on('error', (err) => {
 server.on('message', (msg, rinfo) => {
   msg = JSON.parse(msg);
   if(msg.type=="multi") {
-    msg.data.forEach(handleMessage, rinfo);
+    console.log(msg)
+    msg.data.forEach(x=> handleMessage(x, rinfo));
   } else {
     handleMessage(msg, rinfo);
   }
