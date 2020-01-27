@@ -16,11 +16,11 @@ server.on('message', (msg, rinfo) => {
 });
 
 function handleMessage(msg, rinfo) {
-  sendToPager(msg);
-  msg.server_name = msg.server_name||rinfo.address;
   msg.command_name = msg.command_name||msg.type;
   msg.received_at = new Date();
   key_values[(msg.server_name)+"->"+(msg.command_name)] = msg;
+  msg.server_name = msg.server_name||rinfo.address;
+  sendToPager(msg);
   console.log(`from ${rinfo.address}:${rinfo.port}`);
 }
 
