@@ -30,7 +30,8 @@ function dataFormatter(data) {
         }
         case 'count':{
             counter[data.type||data.command_name] = counter[data.type||data.command_name] || 0;
-            counter[data.type||data.command_name] += (data.data || data.value)*1
+            counter[data.type||data.command_name] += (data.data || data.value)*1;
+            return counter[data.type||data.command_name]
         }
         default:
             if(typeof data.data ==='string' && data.data.match(/# Memory/gim)) return redisMemory(data.data);
