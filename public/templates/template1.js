@@ -28,6 +28,9 @@ function dataFormatter(data) {
         case 'ec2metadata':{
             return ec2metadata(data.data)
         }
+        case 'value':{
+            return data.value
+        }
         case 'count':{
             counter[data.type||data.command_name] = counter[data.type||data.command_name] || 0;
             counter[data.type||data.command_name] += (data.data || data.value)*1;

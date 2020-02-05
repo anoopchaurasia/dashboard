@@ -43,6 +43,9 @@ function sendToPager(msg){
     let value = msg.data === undefined ? msg.value*1 : msg.data*1;
     myMetric.put(value, msg.command_name, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
   }
+  if(msg.formatter==="value") {
+    myMetric.put(msg.value, msg.type, [{Name: 'Region', Value: 'EU'}, {Name: 'Sever', Value: 'Redis'}]);
+  }
 }
 
 let key_values = {};
