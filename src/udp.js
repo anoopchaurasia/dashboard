@@ -5,6 +5,12 @@ server.on('error', (err) => {
   server.close();
 });
 
+const client = require('prom-client');
+const gauge = new client.Gauge({
+  name: "node_my_gauge",
+  help: "This is my gauge"
+});
+
 server.on('message', (msg, rinfo) => {
   msg = JSON.parse(msg);
   if(msg.type=="multi") {
@@ -26,6 +32,9 @@ function handleMessage(msg, rinfo) {
   key_values[(msg.server_name)+"->"+(msg.command_name)] = msg;
   msg.server_name = msg.server_name||rinfo.address;
   sendToPager(msg);
+  if(msg.command_name==="new_email") {
+    gauge.set(msg.value||msg.data);
+  }
   console.log(`from ${rinfo.address}:${rinfo.port}`);
 }
 
@@ -57,4 +66,4 @@ server.on('listening', () => {
 
 server.bind(41234);
 
-exports.stored_data =   key_values;
+exports.stored_data =   {key_values, registers_list};
