@@ -5,11 +5,13 @@ server.on('error', (err) => {
   server.close();
 });
 
+let registers_list=[];
 const client = require('prom-client');
 const gauge = new client.Gauge({
   name: "node_my_gauge",
   help: "This is my gauge"
 });
+registers_list.push(gauge);
 
 server.on('message', (msg, rinfo) => {
   msg = JSON.parse(msg);
