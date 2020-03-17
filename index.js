@@ -24,7 +24,7 @@ app.delete('/delete_data', function(req, res){
     console.log(req.query.key, stored_data[req.query.key]);
     delete stored_data[req.query.key];
     res.json(stored_data);
-})
+});
 
 app.delete('/clean_all', function(req, res){
   for(let i in stored_data) {
