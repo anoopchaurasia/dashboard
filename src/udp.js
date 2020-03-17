@@ -78,4 +78,4 @@ server.on('listening', () => {
 
 server.bind(41234);
 
-exports.stored_data =   {key_values, registers_list};
+exports.stored_data =   {stored_data: key_values, registers_list};
