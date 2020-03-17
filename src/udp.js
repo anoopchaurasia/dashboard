@@ -39,7 +39,7 @@ function handleMessage(msg, rinfo) {
   console.log(`from ${rinfo.address}:${rinfo.port}`);
 }
 
-let eventListenr = new (require("events").EventEmitter());
+let eventListenr = new (require("events").EventEmitter);
 
 function addToGauge(msg, value){
   if(!gauge_list[msg.command_name]) {
