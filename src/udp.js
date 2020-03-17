@@ -42,7 +42,7 @@ function handleMessage(msg, rinfo) {
 function addToGauge(msg, value){
   if(!gauge_list[msg.command_name]) {
     gauge_list[msg.command_name] = new client.Gauge({
-      name: "node_my_gauge",
+      name: msg.command_name,
       help: "This is my gauge"
     });
     registers_list.push(gauge_list[msg.command_name]);
