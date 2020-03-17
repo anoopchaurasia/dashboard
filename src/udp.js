@@ -7,11 +7,8 @@ server.on('error', (err) => {
 
 let registers_list=[];
 const client = require('prom-client');
-const gauge = new client.Gauge({
-  name: "node_my_gauge",
-  help: "This is my gauge"
-});
-registers_list.push(gauge);
+gauge_list = {};
+
 
 server.on('message', (msg, rinfo) => {
   msg = JSON.parse(msg);
@@ -34,10 +31,23 @@ function handleMessage(msg, rinfo) {
   key_values[(msg.server_name)+"->"+(msg.command_name)] = msg;
   msg.server_name = msg.server_name||rinfo.address;
   sendToPager(msg);
-  if(msg.command_name==="new_email") {
-    gauge.set(msg.value||msg.data);
+  if(!isNaN((msg.data+"").trim())) {
+    addToGauge(msg, msg.data)
+  } else if( !isNaN((msg.value+"").trim())){
+    addToGauge(msg, msg.value)
   }
   console.log(`from ${rinfo.address}:${rinfo.port}`);
+}
+
+function addToGauge(msg, value){
+  if(!gauge_list[msg.command_name]) {
+    gauge_list[msg.command_name] = new client.Gauge({
+      name: "node_my_gauge",
+      help: "This is my gauge"
+    });
+    registers_list.push(gauge_list[msg.command_name]);
+  }
+  gauge_list[msg.command_name].set(value*1);
 }
 
 var cloudwatchMetrics = require('cloudwatch-metrics');
