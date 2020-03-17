@@ -42,14 +42,15 @@ function handleMessage(msg, rinfo) {
 let eventListenr = new (require("events").EventEmitter);
 
 function addToGauge(msg, value){
-  if(!gauge_list[msg.command_name]) {
-    gauge_list[msg.command_name] = new client.Gauge({
-      name: msg.command_name,
+  let command_name = msg.command_name.replace(/,/g,"__");
+  if(!gauge_list[command_name]) {
+    gauge_list[command_name] = new client.Gauge({
+      name: command_name,
       help: "This is my gauge"
     });
-    eventListenr.emit("new_gauge", gauge_list[msg.command_name])
+    eventListenr.emit("new_gauge", gauge_list[command_name])
   }
-  gauge_list[msg.command_name].set(value*1);
+  gauge_list[command_name].set(value*1);
 }
 
 var cloudwatchMetrics = require('cloudwatch-metrics');
