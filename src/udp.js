@@ -39,13 +39,15 @@ function handleMessage(msg, rinfo) {
   console.log(`from ${rinfo.address}:${rinfo.port}`);
 }
 
+let eventListenr = new (require("events").EventEmitter());
+
 function addToGauge(msg, value){
   if(!gauge_list[msg.command_name]) {
     gauge_list[msg.command_name] = new client.Gauge({
       name: msg.command_name,
       help: "This is my gauge"
     });
-    register_gauge(gauge_list[msg.command_name]);
+    eventListenr.emit("new_gauge", gauge_list[msg.command_name])
   }
   gauge_list[msg.command_name].set(value*1);
 }
@@ -78,4 +80,4 @@ server.on('listening', () => {
 
 server.bind(41234);
 
-exports.stored_data =   {stored_data: key_values, register_gauge};
+exports.stored_data =   {stored_data: key_values, eventListenr};
