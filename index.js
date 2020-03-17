@@ -5,12 +5,13 @@ const app = express();
 //initialize the WebSocket server instance
 const client = require('prom-client');
 const register = new client.Registry();
-const intervalCollector = client.collectDefaultMetrics({prefix: 'node_', timeout: 5000, register});
-let {stored_data, registers_list} = require("./src/udp").stored_data;
+let all, {stored_data} = require("./src/udp").stored_data;
 
-registers_list.forEach(type=>{
-  register.registerMetric(type);
-})
+
+all.register_gauge = function(gauge) {
+  register.registerMetric(gauge);
+};
+
 app.get('/data', function(req, res){
   res.json(stored_data);
 })

@@ -45,7 +45,7 @@ function addToGauge(msg, value){
       name: msg.command_name,
       help: "This is my gauge"
     });
-    registers_list.push(gauge_list[msg.command_name]);
+    register_gauge(gauge_list[msg.command_name]);
   }
   gauge_list[msg.command_name].set(value*1);
 }
@@ -78,4 +78,4 @@ server.on('listening', () => {
 
 server.bind(41234);
 
-exports.stored_data =   {stored_data: key_values, registers_list};
+exports.stored_data =   {stored_data: key_values, register_gauge};
